@@ -27,6 +27,10 @@ class AddNote : AppCompatActivity() {
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val textHead:String = intent.getStringExtra("recyclerTitle").toString()
+        val textBody:String = intent.getStringExtra("recyclerText").toString()
+        binding.idEdtNoteName.setText(textHead)
+        binding.idEdtNoteDesc.setText(textBody)
 
         viewModel = ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(application))[NoteViewModel::class.java]

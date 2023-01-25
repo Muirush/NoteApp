@@ -78,6 +78,10 @@ class MainActivity : AppCompatActivity(), NoteClickDeleteInterface,NoteClickInte
     }
 
     override fun onNoteClick(note: Note) {
-        Toast.makeText(this, "You have clicked ${note.noteTitle}", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@MainActivity, AddNote::class.java)
+        intent.putExtra("recyclerTitle", note.noteTitle)
+        intent.putExtra("recyclerText", note.noteDescription)
+        startActivity(intent)
+        //Toast.makeText(this, "You have clicked ${note.noteTitle}", Toast.LENGTH_SHORT).show()
     }
 }
