@@ -11,9 +11,9 @@
 
 
 ## Screenshots
-<img src="assets/1.png" width="250"/><img src="assets/2.png" width="250"/> <img src="assets/3.png" width="250"/>
+<img src="assets/1.jpg" width="250"/><img src="assets/2.jpg" width="250"/> <img src="assets/3.jpg" width="250"/>
 
-<img src="assets/4.png" width="250"/> <img src="assets/5.png" width="250"/>
+<img src="assets/4.jpg" width="250"/> <img src="assets/5.jpg" width="250"/>
 
 
 <br>
