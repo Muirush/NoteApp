@@ -3,12 +3,16 @@ package com.example.noteapp.Activities
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build.VERSION_CODES.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -20,6 +24,8 @@ import com.example.noteapp.R
 import com.example.noteapp.Room.Note
 import com.example.noteapp.ViewModel.NoteViewModel
 import com.example.noteapp.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NoteClickDeleteInterface,NoteClickInterface {
     private lateinit var binding: ActivityMainBinding
@@ -29,9 +35,11 @@ class MainActivity : AppCompatActivity(), NoteClickDeleteInterface,NoteClickInte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        showDialog()
+
         binding.addFav.setOnClickListener(){
           val intent = Intent(this@MainActivity,AddNote::class.java )
-            startActivity(intent)
+          startActivity(intent)
 
         }
         val rv = binding.recyclerView
@@ -78,10 +86,28 @@ class MainActivity : AppCompatActivity(), NoteClickDeleteInterface,NoteClickInte
     }
 
     override fun onNoteClick(note: Note) {
+        // opening a new intent and passing a data to it.
         val intent = Intent(this@MainActivity, AddNote::class.java)
-        intent.putExtra("recyclerTitle", note.noteTitle)
-        intent.putExtra("recyclerText", note.noteDescription)
+        intent.putExtra("noteType", "Edit")
+        intent.putExtra("noteTitle", note.noteTitle)
+        intent.putExtra("noteDescription", note.noteDescription)
+        intent.putExtra("noteId", note.id)
         startActivity(intent)
-        //Toast.makeText(this, "You have clicked ${note.noteTitle}", Toast.LENGTH_SHORT).show()
+        //this.finish()
+    }
+    private fun  showDialog(){
+        val view = binding.mainXML
+
+
+        val snackbarView = Snackbar.make(view,"Notes will be saved offline", Snackbar.LENGTH_LONG)
+        val viewer = snackbarView.view
+        val params = viewer.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        snackbarView.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+        snackbarView.show()
+        //viewer.background = ContextCompat.getColor()
+
+
+        //Toast.makeText(this, "Make your notes offline", Toast.LENGTH_SHORT).show()
     }
 }
